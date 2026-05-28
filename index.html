@@ -1481,6 +1481,7 @@ async function doLogin(){
     return;
   }
   loginUser(data.user);
+  if(typeof AndroidBridge !== "undefined") AndroidBridge.onLoginSuccess();
 }
 
 // 비밀번호 재설정 메일 발송
@@ -1986,7 +1987,7 @@ async function adminDeleteNotice(id){
 _supabase.auth.onAuthStateChange((event, session) => {
   if(session && session.user){
     loginUser(session.user);
-    if(event === "SIGNED_IN" && typeof AndroidBridge !== "undefined") AndroidBridge.onLoginSuccess();
+
   }
 });
 
