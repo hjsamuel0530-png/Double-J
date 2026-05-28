@@ -355,6 +355,7 @@ a{text-decoration:none;color:inherit}
     <div class="topbar-avatar">👤</div>
     <span id="topbarEmail" style="display:none;font-size:12px;color:#555570;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
     <button class="btn-logout" onclick="doLogout()">로그아웃</button>
+    <button class="btn-logout" onclick="if(typeof AndroidBridge!=='undefined')AndroidBridge.goToVpn()" style="color:#00d4ff;border-color:#00d4ff">🔒 VPN</button>
   </div>
 </div>
 
@@ -1518,6 +1519,7 @@ async function doLogout(){
   await _supabase.auth.signOut();
   currentUser = null;
   document.getElementById('authOverlay').style.display='flex';
+  if(typeof AndroidBridge !== 'undefined') { AndroidBridge.onLogout(); return; }
   document.getElementById('topbarEmail').style.display='none';
 }
 
