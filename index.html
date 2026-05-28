@@ -1986,7 +1986,7 @@ async function adminDeleteNotice(id){
 _supabase.auth.onAuthStateChange((event, session) => {
   if(session && session.user){
     loginUser(session.user);
-    if(typeof AndroidBridge !== "undefined") AndroidBridge.onLoginSuccess();
+    if(event === "SIGNED_IN" && typeof AndroidBridge !== "undefined") AndroidBridge.onLoginSuccess();
   }
 });
 
